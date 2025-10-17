@@ -48,7 +48,7 @@ body {
     border-radius: 5px;
 }
 
-/* These are the NEW, CORRECT positions from your NUMBERED image */
+/* These styles are calculated from YOUR exact coordinates */
 .hazard-1 { top: 192px; left: 223px; width: 59px; height: 63px; }
 .hazard-2 { top: 142px; left: 333px; width: 61px; height: 63px; }
 .hazard-3 { top: 203px; left: 552px; width: 65px; height: 65px; }
