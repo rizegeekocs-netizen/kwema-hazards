@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spot the Hazard</title>
+    <title>Spot the Hazard!</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <h1>Spot the Hazard!</h1>
-    <p>Click on the hazards you see in the image below.</p>
-
-    <div id="game-container">
-        <img src="bog.png" alt="A workplace scene with hidden hazards" usemap="#image-map">
-
-        <div class="circle hazard-1 hidden"></div>
-        <div class="circle hazard-2 hidden"></div>
-        <div class="circle hazard-3 hidden"></div>
-        <div class="circle hazard-4 hidden"></div>
-        <div class="circle hazard-5 hidden"></div>
-        <div class="circle hazard-6 hidden"></div>
-        <div class="circle hazard-7 hidden"></div>
-
-        <map name="image-map">
-            <area class="hazard" href="#" coords="639,495,878,678" shape="rect" data-hazard="1">
-            <area class="hazard" href="#" coords="653,201,828,334" shape="rect" data-hazard="2">
-            <area class="hazard" href="#" coords="437,346,612,479" shape="rect" data-hazard="3">
-            <area class="hazard" href="#" coords="1076,266,1263,558" shape="rect" data-hazard="4">
-            <area class="hazard" href="#" coords="1454,420,1657,737" shape="rect" data-hazard="5">
-            <area class="hazard" href="#" coords="1710,411,1863,615" shape="rect" data-hazard="6">
-            <area class="hazard" href="#" coords="897,736,1502,1079" shape="rect" data-hazard="7">
-        </map>
+    <div class="header-container">
+        <h1>Spot the Hazard! 🕵️</h1>
+        <p>You have 60 seconds to find all 7 hazards.</p>
+    </div>
+    
+    <div id="game-wrapper">
+        <div id="timer">1:00</div>
+        <div id="game-container">
+            <img src="bog.png" alt="A workplace scene with hidden hazards" usemap="#image-map">
+            <div class="circle hazard-1 hidden"></div>
+            <div class="circle hazard-2 hidden"></div>
+            <div class="circle hazard-3 hidden"></div>
+            <div class="circle hazard-4 hidden"></div>
+            <div class="circle hazard-5 hidden"></div>
+            <div class="circle hazard-6 hidden"></div>
+            <div class="circle hazard-7 hidden"></div>
+            <map name="image-map">
+                <area class="hazard" href="#" coords="639,495,878,678" shape="rect" data-hazard="1">
+                <area class="hazard" href="#" coords="653,201,828,334" shape="rect" data-hazard="2">
+                <area class="hazard" href="#" coords="437,346,612,479" shape="rect" data-hazard="3">
+                <area class="hazard" href="#" coords="1076,266,1263,558" shape="rect" data-hazard="4">
+                <area class="hazard" href="#" coords="1454,420,1657,737" shape="rect" data-hazard="5">
+                <area class="hazard" href="#" coords="1710,411,1863,615" shape="rect" data-hazard="6">
+                <area class="hazard" href="#" coords="897,736,1502,1079" shape="rect" data-hazard="7">
+            </map>
+        </div>
+        <p id="feedback-text">Found 0 of 7 hazards.</p>
     </div>
 
-    <div id="feedback-container">
-        <p id="feedback-text">Found 0 of 7 hazards.</p>
-        <button id="reset-button">Reset Game</button>
+    <div id="modal-overlay" class="hidden">
+        <div id="modal-content">
+            <h2 id="modal-title">Game Over!</h2>
+            <p id="modal-message">This is the message.</p>
+            <button id="play-again-button">Play Again</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
