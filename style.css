@@ -48,11 +48,11 @@ body {
     border-radius: 5px;
 }
 
-/* These are the CORRECT positions for the NEW image */
+/* These are the NEW, CORRECT positions from your NUMBERED image */
 .hazard-1 { top: 192px; left: 223px; width: 59px; height: 63px; }
 .hazard-2 { top: 142px; left: 333px; width: 61px; height: 63px; }
-.hazard-3 { top: 288px; left: 305px; width: 115px; height: 124px; }
-.hazard-4 { top: 203px; left: 552px; width: 65px; height: 65px; }
+.hazard-3 { top: 203px; left: 552px; width: 65px; height: 65px; }
+.hazard-4 { top: 288px; left: 305px; width: 115px; height: 124px; }
 .hazard-5 { top: 273px; left: 623px; width: 90px; height: 94px; }
 .hazard-6 { top: 237px; left: 753px; width: 65px; height: 65px; }
 .hazard-7 { top: 423px; left: 523px; width: 200px; height: 110px; }
