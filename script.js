@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Game elements
     const circles = document.querySelectorAll('.circle');
     const feedbackText = document.getElementById('feedback-text');
-    const image = document.querySelector('#game-container img');
-    const areas = document.querySelectorAll('.hazard');
+    // Select the NEW clickable areas
+    const areas = document.querySelectorAll('.clickable-area');
     const totalHazards = areas.length;
     let foundCount = 0;
     
     // Timer elements
     const timerDisplay = document.getElementById('timer');
-    let timeLeft = 60; // 60 seconds for the timer
+    let timeLeft = 60;
     let timerInterval;
     let gameActive = true;
 
@@ -19,26 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMessage = document.getElementById('modal-message');
     const playAgainButton = document.getElementById('play-again-button');
 
-    // --- TIMER LOGIC ---
     function startTimer() {
+        // Make sure to clear any previous timer before starting a new one
+        clearInterval(timerInterval);
         timerInterval = setInterval(() => {
             timeLeft--;
             const minutes = Math.floor(timeLeft / 60);
             let seconds = timeLeft % 60;
-            seconds = seconds < 10 ? '0' + seconds : seconds; // Add leading zero
+            seconds = seconds < 10 ? '0' + seconds : seconds;
             
             timerDisplay.textContent = `${minutes}:${seconds}`;
 
             if (timeLeft <= 0) {
-                endGame(false); // Game over, player lost
+                endGame(false);
             }
         }, 1000);
     }
 
-    // --- GAME END LOGIC ---
     function endGame(playerWon) {
-        clearInterval(timerInterval); // Stop the timer
-        gameActive = false; // Stop player from clicking hazards
+        clearInterval(timerInterval);
+        gameActive = false;
 
         if (playerWon) {
             modalTitle.textContent = 'Congratulations! 🎉';
@@ -50,60 +50,34 @@ document.addEventListener('DOMContentLoaded', () => {
         modalOverlay.classList.remove('hidden');
     }
 
-    // --- GAME SETUP AND EVENT LISTENERS ---
     function updateFeedback() {
         feedbackText.textContent = `Found ${foundCount} of ${totalHazards} hazards.`;
     }
 
     playAgainButton.addEventListener('click', () => {
-        location.reload(); // Easiest way to restart the game
+        location.reload();
     });
 
-    let originalCoords = [];
-    let originalWidth = 0;
+    // Add click listeners to the new clickable areas
+    areas.forEach(area => {
+        area.addEventListener('click', () => {
+            if (!gameActive) return;
 
-    function resizeMap() {
-        if (!originalWidth) return;
-        const currentWidth = image.clientWidth;
-        const ratio = currentWidth / originalWidth;
+            const hazardId = area.dataset.hazard;
+            const correspondingCircle = document.querySelector(`.circle.hazard-${hazardId}`);
 
-        areas.forEach((area, index) => {
-            const coords = originalCoords[index];
-            const newCoords = coords.map(c => Math.round(c * ratio)).join(',');
-            area.setAttribute('coords', newCoords);
-        });
-    }
-
-    image.onload = () => {
-        originalWidth = image.naturalWidth;
-        
-        areas.forEach(area => {
-            originalCoords.push(area.coords.split(',').map(Number));
-        });
-
-        areas.forEach(area => {
-            area.addEventListener('click', (event) => {
-                event.preventDefault();
-                if (!gameActive) return; // Ignore clicks if game is over
-
-                const hazardId = area.dataset.hazard;
-                const correspondingCircle = document.querySelector(`.circle.hazard-${hazardId}`);
-
-                if (correspondingCircle && correspondingCircle.classList.contains('hidden')) {
-                    correspondingCircle.classList.remove('hidden');
-                    foundCount++;
-                    updateFeedback();
-                    
-                    if (foundCount === totalHazards) {
-                        endGame(true); // Game over, player won
-                    }
+            if (correspondingCircle && correspondingCircle.classList.contains('hidden')) {
+                correspondingCircle.classList.remove('hidden');
+                foundCount++;
+                updateFeedback();
+                
+                if (foundCount === totalHazards) {
+                    endGame(true);
                 }
-            });
+            }
         });
-        
-        resizeMap();
-        startTimer(); // Start the timer only after the image is loaded
-    };
+    });
 
-    window.addEventListener('resize', resizeMap);
+    // Start the timer when the script loads
+    startTimer();
 });
