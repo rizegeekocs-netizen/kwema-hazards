@@ -4,7 +4,8 @@ body {
     background: #f0f2f5;
     color: #333;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .header-container h1 {
@@ -21,6 +22,10 @@ body {
     display: inline-block;
     position: relative;
     border: 1px solid #ddd;
+    /* Ensure the wrapper scales down */
+    max-width: 1024px; /* Adjust to your image's max comfortable width */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #timer {
@@ -40,24 +45,33 @@ body {
 
 #game-container {
     position: relative;
-    margin-top: 40px; /* Make space for the timer */
+    margin-top: 40px;
 }
 
 #game-container img {
     display: block;
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
 .circle {
     position: absolute;
-    border: 5px solid #ff4757;
+    border: 4px solid #ff4757;
     border-radius: 50%;
     box-sizing: border-box;
     pointer-events: none;
     animation: pop-in 0.3s ease;
 }
+
+.clickable-area {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    /* For debugging, uncomment the next line to see the hotspots */
+    /* background: rgba(0, 255, 0, 0.4); */
+}
+
 
 @keyframes pop-in {
     from { transform: scale(0.5); opacity: 0; }
@@ -87,6 +101,8 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 100;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 #modal-content {
@@ -96,6 +112,8 @@ body {
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     animation: slide-up 0.4s ease;
+    width: 100%;
+    max-width: 500px;
 }
 
 @keyframes slide-up {
@@ -103,38 +121,31 @@ body {
     to { transform: translateY(0); opacity: 1; }
 }
 
-#modal-title {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-    color: #0056b3;
-}
+#modal-title { font-size: 2.2em; margin-bottom: 10px; color: #0056b3; }
+#modal-message { font-size: 1.1em; margin-bottom: 25px; }
+#play-again-button { background: #007bff; color: white; border: none; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background-color 0.2s; }
+#play-again-button:hover { background: #0056b3; }
 
-#modal-message {
-    font-size: 1.1em;
-    margin-bottom: 25px;
-}
+/* --- POSITIONS IN PERCENTAGES --- */
+/* (Calculated based on an original image size of approx. 1920x1080) */
+.hazard-1 { top: 45.8%; left: 33.3%; width: 12.4%; height: 16.9%; }
+.hazard-2 { top: 18.6%; left: 34.0%; width: 9.1%;  height: 12.3%; }
+.hazard-3 { top: 32.0%; left: 22.7%; width: 9.1%;  height: 12.3%; }
+.hazard-4 { top: 24.6%; left: 56.0%; width: 9.7%;  height: 27.0%; }
+.hazard-5 { top: 38.9%; left: 75.7%; width: 10.6%; height: 29.3%; }
+.hazard-6 { top: 38.0%; left: 89.0%; width: 8.0%;  height: 18.9%; }
+.hazard-7 { top: 68.1%; left: 46.7%; width: 31.5%; height: 31.7%; }
 
-#play-again-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1em;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
 
-#play-again-button:hover {
-    background: #0056b3;
+/* --- MOBILE STYLES --- */
+@media (max-width: 768px) {
+    body { padding: 5px; }
+    .header-container h1 { font-size: 1.8em; }
+    .header-container p { font-size: 0.9em; }
+    #game-wrapper { padding: 10px; }
+    #timer { font-size: 1.1em; padding: 8px 20px; }
+    #game-container { margin-top: 30px; }
+    #modal-title { font-size: 1.5em; }
+    #modal-message { font-size: 1em; }
+    .circle { border-width: 3px; }
 }
-
-/* Hazard positions (from your last correct version) */
-.hazard-1 { top: 495px; left: 639px; width: 239px; height: 183px; }
-.hazard-2 { top: 201px; left: 653px; width: 175px; height: 133px; }
-.hazard-3 { top: 346px; left: 437px; width: 175px; height: 133px; }
-.hazard-4 { top: 266px; left: 1076px; width: 187px; height: 292px; }
-.hazard-5 { top: 420px; left: 1454px; width: 203px; height: 317px; }
-.hazard-6 { top: 411px; left: 1710px; width: 153px; height: 204px; }
-.hazard-7 { top: 736px; left: 897px; width: 605px; height: 343px; }
