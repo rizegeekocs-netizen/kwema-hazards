@@ -19,7 +19,8 @@
     <div id="game-wrapper">
         <div id="timer">1:00</div>
         <div id="game-container">
-            <img src="bog.png" alt="A workplace scene with hidden hazards" usemap="#image-map">
+            <img src="bog.png" alt="A workplace scene with hidden hazards">
+            
             <div class="circle hazard-1 hidden"></div>
             <div class="circle hazard-2 hidden"></div>
             <div class="circle hazard-3 hidden"></div>
@@ -27,15 +28,14 @@
             <div class="circle hazard-5 hidden"></div>
             <div class="circle hazard-6 hidden"></div>
             <div class="circle hazard-7 hidden"></div>
-            <map name="image-map">
-                <area class="hazard" href="#" coords="639,495,878,678" shape="rect" data-hazard="1">
-                <area class="hazard" href="#" coords="653,201,828,334" shape="rect" data-hazard="2">
-                <area class="hazard" href="#" coords="437,346,612,479" shape="rect" data-hazard="3">
-                <area class="hazard" href="#" coords="1076,266,1263,558" shape="rect" data-hazard="4">
-                <area class="hazard" href="#" coords="1454,420,1657,737" shape="rect" data-hazard="5">
-                <area class="hazard" href="#" coords="1710,411,1863,615" shape="rect" data-hazard="6">
-                <area class="hazard" href="#" coords="897,736,1502,1079" shape="rect" data-hazard="7">
-            </map>
+
+            <div class="clickable-area hazard-1" data-hazard="1"></div>
+            <div class="clickable-area hazard-2" data-hazard="2"></div>
+            <div class="clickable-area hazard-3" data-hazard="3"></div>
+            <div class="clickable-area hazard-4" data-hazard="4"></div>
+            <div class="clickable-area hazard-5" data-hazard="5"></div>
+            <div class="clickable-area hazard-6" data-hazard="6"></div>
+            <div class="clickable-area hazard-7" data-hazard="7"></div>
         </div>
         <p id="feedback-text">Found 0 of 7 hazards.</p>
     </div>
