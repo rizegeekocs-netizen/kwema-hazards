@@ -48,11 +48,11 @@ body {
     border-radius: 5px;
 }
 
-/* PRECISE positions for the circles, based on your highlighted image */
-.hazard-1 { top: 250px; left: 20px;  width: 95px;  height: 60px; }
-.hazard-2 { top: 285px; left: 200px; width: 80px;  height: 50px; }
-.hazard-3 { top: 215px; left: 410px; width: 50px;  height: 50px; }
-.hazard-4 { top: 320px; left: 475px; width: 60px;  height: 50px; }
-.hazard-5 { top: 230px; left: 710px; width: 50px;  height: 50px; }
-.hazard-6 { top: 10px;  left: 700px; width: 50px;  height: 45px; }
-.hazard-7 { top: 10px;  left: 500px; width: 50px;  height: 50px; }
+/* These are the NEW, CORRECT positions for the circles */
+.hazard-1 { top: 192px; left: 223px; width: 59px; height: 63px; }
+.hazard-2 { top: 142px; left: 333px; width: 61px; height: 63px; }
+.hazard-3 { top: 288px; left: 305px; width: 115px; height: 124px; }
+.hazard-4 { top: 203px; left: 552px; width: 65px; height: 65px; }
+.hazard-5 { top: 273px; left: 623px; width: 90px; height: 94px; }
+.hazard-6 { top: 237px; left: 753px; width: 65px; height: 65px; }
+.hazard-7 { top: 423px; left: 523px; width: 200px; height: 110px; }
