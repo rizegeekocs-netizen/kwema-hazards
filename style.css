@@ -22,7 +22,8 @@ body {
     display: inline-block;
     position: relative;
     border: 1px solid #ddd;
-    max-width: 950px;
+    /* Set max-width to your image's width for best results */
+    max-width: 1920px; 
     width: 100%;
     box-sizing: border-box;
 }
@@ -112,20 +113,21 @@ body {
 }
 #play-again-button:hover { background: #0056b3; }
 
-/* --- HAZARD POSITIONS IN PERCENTAGES --- */
+/* --- HAZARD POSITIONS (Calculated from your coordinates) --- */
+/* (Assuming base image is approx 1920x1080) */
+
 /* Hazard 1: Power strip */
-.hazard-1 { top: 76.5%; left: 16.5%; width: 11%; height: 16%; } 
-/* Hazard 2: Rolled rug */
-.hazard-2 { top: 66.5%; left: 29.5%; width: 15%; height: 17%; }
+.hazard-1 { top: 77.78%; left: 12.24%; width: 9.79%; height: 10.28%; } 
+/* Hazard 2: Rug */
+.hazard-2 { top: 62.96%; left: 30.1%; width: 18.44%; height: 27.31%; }
 /* Hazard 3: Dog */
-.hazard-3 { top: 72%; left: 39%; width: 11%; height: 19%; }
-/* Hazard 4: Medications/Syringe */
-.hazard-4 { top: 70%; left: 56.5%; width: 14%; height: 16%; }
-/* Hazard 5: Clothes on couch */
-.hazard-5 { top: 60%; left: 81%; width: 12%; height: 20%; }
+.hazard-3 { top: 80.09%; left: 38.75%; width: 10.42%; height: 18.52%; }
+/* Hazard 4: Meds/Syringe */
+.hazard-4 { top: 81.02%; left: 58.18%; width: 9.38%; height: 12.5%; }
+/* Hazard 5: Clothes */
+.hazard-5 { top: 58.52%; left: 76.61%; width: 17.08%; height: 18.7%; }
 /* Hazard 6: Man pointing */
-.hazard-6 { top: 35%; left: 63%; width: 15%; height: 40%; }
-/* Hazard 7 removed */
+.hazard-6 { top: 38.15%; left: 65.31%; width: 11.3%; height: 33.89%; }
 
 
 /* --- MOBILE STYLES (No changes) --- */
