@@ -22,8 +22,7 @@ body {
     display: inline-block;
     position: relative;
     border: 1px solid #ddd;
-    /* Ensure the wrapper scales down */
-    max-width: 1024px; /* Adjust to your image's max comfortable width */
+    max-width: 950px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -68,7 +67,7 @@ body {
     position: absolute;
     border-radius: 50%;
     cursor: pointer;
-    /* For debugging, uncomment the next line to see the hotspots */
+    /* Uncomment the next line for debugging to see the hotspots */
     /* background: rgba(0, 255, 0, 0.4); */
 }
 
@@ -89,55 +88,47 @@ body {
     color: #0056b3;
 }
 
-/* Modal styles */
+/* Modal styles - (No changes) */
 #modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    padding: 10px;
-    box-sizing: border-box;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center;
+    z-index: 100; padding: 10px; box-sizing: border-box;
 }
-
 #modal-content {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    animation: slide-up 0.4s ease;
-    width: 100%;
-    max-width: 500px;
+    background: white; padding: 30px 40px; border-radius: 16px; text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); animation: slide-up 0.4s ease;
+    width: 100%; max-width: 500px;
 }
-
 @keyframes slide-up {
     from { transform: translateY(50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
-
 #modal-title { font-size: 2.2em; margin-bottom: 10px; color: #0056b3; }
 #modal-message { font-size: 1.1em; margin-bottom: 25px; }
-#play-again-button { background: #007bff; color: white; border: none; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background-color 0.2s; }
+#play-again-button {
+    background: #007bff; color: white; border: none; padding: 12px 25px;
+    font-size: 1.1em; font-weight: bold; border-radius: 8px; cursor: pointer;
+    transition: background-color 0.2s;
+}
 #play-again-button:hover { background: #0056b3; }
 
-/* --- POSITIONS IN PERCENTAGES --- */
-/* (Calculated based on an original image size of approx. 1920x1080) */
-.hazard-1 { top: 45.8%; left: 33.3%; width: 12.4%; height: 16.9%; }
-.hazard-2 { top: 18.6%; left: 34.0%; width: 9.1%;  height: 12.3%; }
-.hazard-3 { top: 32.0%; left: 22.7%; width: 9.1%;  height: 12.3%; }
-.hazard-4 { top: 24.6%; left: 56.0%; width: 9.7%;  height: 27.0%; }
-.hazard-5 { top: 38.9%; left: 75.7%; width: 10.6%; height: 29.3%; }
-.hazard-6 { top: 38.0%; left: 89.0%; width: 8.0%;  height: 18.9%; }
-.hazard-7 { top: 68.1%; left: 46.7%; width: 31.5%; height: 31.7%; }
+/* --- HAZARD POSITIONS IN PERCENTAGES --- */
+/* Hazard 1: Power strip */
+.hazard-1 { top: 76.5%; left: 16.5%; width: 11%; height: 16%; } 
+/* Hazard 2: Rolled rug */
+.hazard-2 { top: 66.5%; left: 29.5%; width: 15%; height: 17%; }
+/* Hazard 3: Dog */
+.hazard-3 { top: 72%; left: 39%; width: 11%; height: 19%; }
+/* Hazard 4: Medications/Syringe */
+.hazard-4 { top: 70%; left: 56.5%; width: 14%; height: 16%; }
+/* Hazard 5: Clothes on couch */
+.hazard-5 { top: 60%; left: 81%; width: 12%; height: 20%; }
+/* Hazard 6: Man pointing */
+.hazard-6 { top: 35%; left: 63%; width: 15%; height: 40%; }
+/* Hazard 7 removed */
 
 
-/* --- MOBILE STYLES --- */
+/* --- MOBILE STYLES (No changes) --- */
 @media (max-width: 768px) {
     body { padding: 5px; }
     .header-container h1 { font-size: 1.8em; }
