@@ -104,6 +104,8 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 #pause-button {
