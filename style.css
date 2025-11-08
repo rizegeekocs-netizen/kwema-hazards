@@ -22,8 +22,7 @@ body {
     display: inline-block;
     position: relative;
     border: 1px solid #ddd;
-    /* Set max-width to your image's width for best results */
-    max-width: 1920px; 
+    max-width: 1920px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -68,7 +67,7 @@ body {
     position: absolute;
     border-radius: 50%;
     cursor: pointer;
-    /* Uncomment the next line for debugging to see the hotspots */
+    /* For debugging, uncomment the next line to see the hotspots */
     /* background: rgba(0, 255, 0, 0.4); */
 }
 
@@ -87,6 +86,50 @@ body {
     font-weight: bold;
     margin-top: 20px;
     color: #0056b3;
+}
+
+/* NEW: Styles for control buttons */
+#game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.game-button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#pause-button {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+
+#pause-button:hover {
+    background-color: #e0a800;
+}
+
+#pause-button.resume {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+#pause-button.resume:hover {
+    background-color: #218838;
+}
+
+#reset-button {
+    background-color: #6c757d; /* Gray */
+    color: white;
+}
+
+#reset-button:hover {
+    background-color: #5a6268;
 }
 
 /* Modal styles - (No changes) */
@@ -114,19 +157,11 @@ body {
 #play-again-button:hover { background: #0056b3; }
 
 /* --- HAZARD POSITIONS (Calculated from your coordinates) --- */
-/* (Assuming base image is approx 1920x1080) */
-
-/* Hazard 1: Power strip */
 .hazard-1 { top: 77.78%; left: 12.24%; width: 9.79%; height: 10.28%; } 
-/* Hazard 2: Rug */
 .hazard-2 { top: 62.96%; left: 30.1%; width: 18.44%; height: 27.31%; }
-/* Hazard 3: Dog */
 .hazard-3 { top: 80.09%; left: 38.75%; width: 10.42%; height: 18.52%; }
-/* Hazard 4: Meds/Syringe */
 .hazard-4 { top: 81.02%; left: 58.18%; width: 9.38%; height: 12.5%; }
-/* Hazard 5: Clothes */
 .hazard-5 { top: 58.52%; left: 76.61%; width: 17.08%; height: 18.7%; }
-/* Hazard 6: Man pointing */
 .hazard-6 { top: 38.15%; left: 65.31%; width: 11.3%; height: 33.89%; }
 
 
