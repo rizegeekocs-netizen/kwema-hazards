@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeLeft = 60;
     let timerInterval;
     let gameActive = true;
-    let isPaused = false; // New state for pausing
+    let isPaused = false;
 
     // Modal elements
     const modalOverlay = document.getElementById('modal-overlay');
@@ -19,13 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMessage = document.getElementById('modal-message');
     const playAgainButton = document.getElementById('play-again-button');
 
-    // NEW: Control buttons
+    // Control buttons
     const pauseButton = document.getElementById('pause-button');
     const resetButton = document.getElementById('reset-button');
 
     // --- TIMER LOGIC ---
     function startTimer() {
-        // Make sure to clear any previous timer before starting a new one
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
             timeLeft--;
@@ -56,43 +55,39 @@ document.addEventListener('DOMContentLoaded', () => {
         modalOverlay.classList.remove('hidden');
     }
 
-    // --- NEW: PAUSE/RESUME LOGIC ---
+    // --- PAUSE/RESUME LOGIC ---
     function togglePause() {
-        if (!gameActive) return; // Don't pause if game is already over
+        if (!gameActive) return;
 
-        isPaused = !isPaused; // Flip the pause state
+        isPaused = !isPaused;
 
         if (isPaused) {
-            clearInterval(timerInterval); // Stop the timer
+            clearInterval(timerInterval);
             pauseButton.textContent = 'Resume';
-            pauseButton.classList.add('resume'); // Add .resume class for green color
+            pauseButton.classList.add('resume');
         } else {
-            startTimer(); // Resume the timer
+            startTimer();
             pauseButton.textContent = 'Pause';
-            pauseButton.classList.remove('resume'); // Remove .resume class
+            pauseButton.classList.remove('resume');
         }
     }
 
-    // --- NEW: RESET GAME LOGIC ---
+    // --- RESET GAME LOGIC ---
     function resetGame() {
-        // Reset all game variables
         clearInterval(timerInterval);
         timeLeft = 60;
         foundCount = 0;
         gameActive = true;
         isPaused = false;
 
-        // Reset UI
         timerDisplay.textContent = '1:00';
         updateFeedback();
         circles.forEach(circle => circle.classList.add('hidden'));
-        modalOverlay.classList.add('hidden'); // Hide modal if it's open
+        modalOverlay.classList.add('hidden');
 
-        // Reset pause button
         pauseButton.textContent = 'Pause';
         pauseButton.classList.remove('resume');
 
-        // Start a new game
         startTimer();
     }
 
@@ -102,17 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- EVENT LISTENERS ---
-    playAgainButton.addEventListener('click', () => {
-        location.reload(); // "Play Again" does a full page reload
+    
+    // CHANGED 'click' to 'touchend'
+    playAgainButton.addEventListener('touchend', () => {
+        location.reload();
     });
 
-    // NEW: Add listeners for new buttons
-    pauseButton.addEventListener('click', togglePause);
-    resetButton.addEventListener('click', resetGame);
+    // CHANGED 'click' to 'touchend'
+    pauseButton.addEventListener('touchend', togglePause);
+    
+    // CHANGED 'click' to 'touchend'
+    resetButton.addEventListener('touchend', resetGame);
 
+    // CHANGED 'click' to 'touchend'
     areas.forEach(area => {
-        area.addEventListener('click', () => {
-            // Don't allow clicking if paused or game is over
+        area.addEventListener('touchend', (event) => {
+            event.preventDefault(); // Stop the screen from bouncing
             if (!gameActive || isPaused) return;
 
             const hazardId = area.dataset.hazard;
