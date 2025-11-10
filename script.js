@@ -6,12 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalHazards = areas.length;
     let foundCount = 0;
     
+    // Found hazards list elements
+    const foundHazardsContainer = document.getElementById('found-hazards-container');
+    const foundHazardsList = document.getElementById('found-hazards-list');
+
     // Timer elements
     const timerDisplay = document.getElementById('timer');
     let timeLeft = 60;
     let timerInterval;
     let gameActive = true;
-    let isPaused = false; // New state for pausing
+    let isPaused = false;
 
     // Modal elements
     const modalOverlay = document.getElementById('modal-overlay');
@@ -19,15 +23,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMessage = document.getElementById('modal-message');
     const playAgainButton = document.getElementById('play-again-button');
 
-    // NEW: Control buttons
+    // Control buttons
     const pauseButton = document.getElementById('pause-button');
     const resetButton = document.getElementById('reset-button');
 
+    // --- Universal Click/Tap Event Handler ---
+    // This prevents "ghost clicks" on mobile
+    function addSmartEventListener(element, handler) {
+        let isHandlingEvent = false;
+
+        element.addEventListener('touchend', (e) => {
+            e.preventDefault(); 
+            if (isHandlingEvent) return;
+            isHandlingEvent = true;
+            handler(e);
+            setTimeout(() => {
+                isHandlingEvent = false;
+            }, 300);
+        });
+
+        element.addEventListener('click', (e) => {
+            if (isHandlingEvent) return;
+            handler(e);
+        });
+    }
+
     // --- TIMER LOGIC ---
     function startTimer() {
-        // Make sure to clear any previous timer before starting a new one
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
+            if (isPaused) return; // Don't count down if paused
             timeLeft--;
             const minutes = Math.floor(timeLeft / 60);
             let seconds = timeLeft % 60;
@@ -56,43 +81,41 @@ document.addEventListener('DOMContentLoaded', () => {
         modalOverlay.classList.remove('hidden');
     }
 
-    // --- NEW: PAUSE/RESUME LOGIC ---
+    // --- PAUSE/RESUME LOGIC ---
     function togglePause() {
-        if (!gameActive) return; // Don't pause if game is already over
-
-        isPaused = !isPaused; // Flip the pause state
+        if (!gameActive) return;
+        isPaused = !isPaused; 
 
         if (isPaused) {
-            clearInterval(timerInterval); // Stop the timer
+            // No need to clear interval, just let it skip
             pauseButton.textContent = 'Resume';
-            pauseButton.classList.add('resume'); // Add .resume class for green color
+            pauseButton.classList.add('resume'); 
         } else {
-            startTimer(); // Resume the timer
+            // No need to restart, it will just resume counting
             pauseButton.textContent = 'Pause';
-            pauseButton.classList.remove('resume'); // Remove .resume class
+            pauseButton.classList.remove('resume'); 
         }
     }
 
-    // --- NEW: RESET GAME LOGIC ---
+    // --- RESET GAME LOGIC ---
     function resetGame() {
-        // Reset all game variables
         clearInterval(timerInterval);
         timeLeft = 60;
         foundCount = 0;
         gameActive = true;
         isPaused = false;
 
-        // Reset UI
         timerDisplay.textContent = '1:00';
         updateFeedback();
         circles.forEach(circle => circle.classList.add('hidden'));
-        modalOverlay.classList.add('hidden'); // Hide modal if it's open
+        modalOverlay.classList.add('hidden'); 
 
-        // Reset pause button
         pauseButton.textContent = 'Pause';
         pauseButton.classList.remove('resume');
 
-        // Start a new game
+        foundHazardsList.innerHTML = '';
+        foundHazardsContainer.classList.add('hidden');
+
         startTimer();
     }
 
@@ -101,18 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackText.textContent = `Found ${foundCount} of ${totalHazards} hazards.`;
     }
 
-    // --- EVENT LISTENERS ---
-    playAgainButton.addEventListener('click', () => {
-        location.reload(); // "Play Again" does a full page reload
+    // --- EVENT LISTENERS (Using the new smart handler) ---
+    
+    addSmartEventListener(playAgainButton, () => {
+        location.reload();
     });
 
-    // NEW: Add listeners for new buttons
-    pauseButton.addEventListener('click', togglePause);
-    resetButton.addEventListener('click', resetGame);
+    addSmartEventListener(pauseButton, togglePause);
+    
+    addSmartEventListener(resetButton, resetGame);
 
     areas.forEach(area => {
-        area.addEventListener('click', () => {
-            // Don't allow clicking if paused or game is over
+        addSmartEventListener(area, (event) => {
             if (!gameActive || isPaused) return;
 
             const hazardId = area.dataset.hazard;
@@ -122,6 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 correspondingCircle.classList.remove('hidden');
                 foundCount++;
                 updateFeedback();
+                
+                // Add the hazard name to the list
+                const hazardName = area.dataset.name;
+                const newListItem = document.createElement('li');
+                newListItem.textContent = hazardName;
+                foundHazardsList.appendChild(newListItem);
+                foundHazardsContainer.classList.remove('hidden'); // Show the list
                 
                 if (foundCount === totalHazards) {
                     endGame(true);
